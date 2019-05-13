@@ -410,3 +410,152 @@
 
 + 看笔记
 
+## Process
+
+```
+/*
+*   fork.c
+*   1) parent and child tranfor process
+*/
+/*
+*   exec.c
+*   1),第一个"ps" 是程序名,execlp函数要在PATH环境变量中找到这个程序并执行它
+*   2),而第二个"ps" 是第一个命令行参数,execlp函数并不关心它的值,只是简单地把它传给ps 程序,
+*/
+/*
+*    pipe.c   
+*	1)管道
+*/
+/*
+*   upper.c
+*   1) 转换小写位大写
+*/
+```
+
+## Signal
+
+```
+$ 代码没有实现，一直在报错
+/*
+*   blood signal.c
+*   
+*/
+
+/*
+*   Infinite loop.c
+*   1)死循环
+*/
+
+/*
+*   mysleep.c 
+*   1) 
+*/
+```
+
+## Pthread
+
+1. pthread_create.c
+
+   ```
+   /*
+   *   pthread_create()
+   *   1)get the process pid and thread tid
+   */
+   ```
+
+2. pthread_metux.c
+
+   ```
+   /*
+   *   pthread_metux.c
+   *   1)防止冲突:在线程访问内存数据的时候
+   */
+   ```
+
+3. ```
+   /*
+   *   pthread_con.c
+   *   condition variable
+   *   1) 通过条件变量(Condition Variable)来阻塞等待一个条件,或者唤醒等待这个条件的线程.
+   */
+   
+   /*
+   *   pthread_exit()
+   *   1) three ways for exit thread
+   */
+   ```
+
+## Socket
+
+### TCP
+
+1. server
+
+   ```
+   /*
+   *   server.c
+   *   1)是从客户端读字符,然后将每个字符转换为大写并回送给客户端；
+   *   2)server 只能满足单个client的一次请求；
+   *   3)server -- 单个client的多次请求：将应答写在while(1)中；
+   *   4)server -- fork(); 处理多个client的请求
+   *   5)在同一个终端，关闭server后，还能重新开启server
+   */
+   
+   /*
+   *   select_server.c
+   *   1)select是网络程序中很常用的一个系统调用,它可以同时监听多个阻塞的文件描述符
+   *   2)不需要fork和多进程就可以实现并发服务的server。
+   *   3) 未使用
+   */
+   ```
+
+2. client
+
+   ```
+   /*
+   *   client.c
+   *   1)是从命令行参数中获得一个字符串发给服务器,
+   *     然后接收服务器返回的字符串并打印。
+   */
+   /* client_interactive.c 
+   *   1) client and server 交互式进行应答
+   */
+   ```
+
+3. wrap
+
+   ```
+   /*
+   *   wrap.c
+   *   1)把与socket相关的一些系统函数加上错误处理代码包装成新的函数,做成一个模块wrap.c:
+   *   2)依赖文件wrap也要编译成wrap.o库文件；而不是编译成可执行文件;一直报错，未声明使用
+   */
+   ```
+
+### UDP
+
+1. server
+
+   ```
+   /*
+   *   server.c
+   *   1) UDP 过程中少了listen and accept
+   *   2) 不用关闭文件描述符
+   *   3) recvfrom error: Transport endpoint is not connected
+   *      udp 中的采用的是数据报文，并非流 SOCK_STREAM --> SOCK_DGRAM 
+   */
+   ```
+
+2. client
+
+   ```
+   /*
+   *   client.c
+   *   1)  SOCK_STREAM --> SOCK_DGRAM
+   *   2) UDP 不用考虑多个client的链接
+   ×       不用考虑同意终端关闭server后不能重新开启的现象
+   */
+   ```
+
+   
+
