@@ -6,4 +6,13 @@ CFLAGS = -g -Wall
 all: bind
 
 bind:	bind.o
-	$(CC) 
+	$(CC) $^ -o $@
+bind.o:	bind.c 
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	@echo "cleanning project"
+	-rm bind
+	-rm *.o
+	@echo "cleanning complie"
+.PHONY:clean
